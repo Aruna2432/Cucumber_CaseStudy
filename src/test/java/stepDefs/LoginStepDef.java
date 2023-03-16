@@ -26,7 +26,7 @@ public class LoginStepDef {
 	List<WebElement> BeforeDel;
 	
 	@BeforeAll
-	public static void Launch() {
+	public static void launch() {
 		WebDriverManager.edgedriver().setup();
 	    driver = new EdgeDriver();  
 	    driver.manage().window().maximize();
