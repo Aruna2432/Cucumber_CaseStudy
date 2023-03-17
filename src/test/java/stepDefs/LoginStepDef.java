@@ -57,24 +57,25 @@ public class LoginStepDef {
 		driver.findElement(By.xpath("//a[contains(text(),'Home')]")).click();
 		driver.findElement(By.linkText(Items)).click();
 		driver.findElement(By.xpath("//a[contains(text(),'Add')]")).click();
+		wait.until(ExpectedConditions.alertIsPresent());
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
 		
 	}
 	@Then("Should display success message")
 	public void should_display_success_message() {
 		//System.out.println("---------");
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-		wait.until(ExpectedConditions.alertIsPresent());
-		Alert alert = driver.switchTo().alert();
-		alert.accept();
-	  	System.out.println(alert.getText());
+		WebElement cart = driver.findElement(By.cssSelector("a#cartur"));
+		wait.until(ExpectedConditions.visibilityOfAllElements(cart));
+		cart.click();
+		List<WebElement> Items = driver.findElements(By.xpath("//td[2]"));
+		Assert.assertTrue(Items.size()!=0);
 	  	//System.out.println("---------");
 	}
 	@When("User deletes an item")
 	public void user_deletes_an_item() {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
-		WebElement cart = driver.findElement(By.cssSelector("a#cartur"));
-		wait.until(ExpectedConditions.visibilityOfAllElements(cart));
-		cart.click();
+		
 		BeforeDel = driver.findElements(By.xpath("//td[2]"));
 		wait.until(ExpectedConditions.visibilityOfAllElements(BeforeDel));
 		//System.out.println("No . of. items added to cart : " + BeforeDel.size());
