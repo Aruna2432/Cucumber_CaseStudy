@@ -110,8 +110,9 @@ public class LoginStepDef {
 	}
 	@Then("Order must be placed")
 	public void order_must_be_placed() {
+		Assert.assertTrue(driver.findElement(By.xpath("//h2[text()='Thank you for your purchase!']")).isDisplayed());
 		WebElement ok = driver.findElement(By.xpath("//button[contains(text(),'OK')]"));
-		//wait.until(ExpectedConditions.visibilityOf(ok));
+		//wait.until(ExpectedConditions.visibilityOf(ok);
 	    ok.click();
 	  	System.out.println("Order placed successfully !");
 	  	//System.out.println("---------");
