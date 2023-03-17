@@ -57,14 +57,16 @@ public class LoginStepDef {
 		driver.findElement(By.xpath("//a[contains(text(),'Home')]")).click();
 		driver.findElement(By.linkText(Items)).click();
 		driver.findElement(By.xpath("//a[contains(text(),'Add')]")).click();
-		wait.until(ExpectedConditions.alertIsPresent());
-		Alert alert = driver.switchTo().alert();
-		alert.accept();
+		
 	}
 	@Then("Should display success message")
 	public void should_display_success_message() {
 		//System.out.println("---------");
-	  	System.out.println("Item added to cart successfully");
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+		wait.until(ExpectedConditions.alertIsPresent());
+		Alert alert = driver.switchTo().alert();
+		alert.accept();
+	  	System.out.println(alert.getText());
 	  	//System.out.println("---------");
 	}
 	@When("User deletes an item")
