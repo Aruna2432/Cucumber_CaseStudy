@@ -75,7 +75,10 @@ public class LoginStepDef {
 	}
 	@When("User deletes an item")
 	public void user_deletes_an_item() {
-		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+		WebElement cart = driver.findElement(By.cssSelector("a#cartur"));
+		wait.until(ExpectedConditions.visibilityOfAllElements(cart));
+		cart.click();
 		BeforeDel = driver.findElements(By.xpath("//td[2]"));
 		wait.until(ExpectedConditions.visibilityOfAllElements(BeforeDel));
 		//System.out.println("No . of. items added to cart : " + BeforeDel.size());
